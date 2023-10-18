@@ -3,6 +3,7 @@ package com.aor.numbers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,18 +48,13 @@ public class ListAggregatorTest {
     @Test
     public void distinct() {
 
-        GenericListDeduplicator deduplicator = new GenericListDeduplicator() {
-            @Override
-            public List<Integer> deduplicate(List<Integer> list, GenericListSorter sorter) {
-                return Arrays.asList(1, 2, 4, 5);
-            }
-        };
-        GenericListSorter sorter = new GenericListSorter() {
-            @Override
-            public List<Integer> sort(List<Integer> list) {
-                return Arrays.asList(1,2,2,4,5);
-            }
-        };
+
+        GenericListDeduplicator deduplicator = Mockito.mock(GenericListDeduplicator.class);
+        Mockito.when(deduplicator.deduplicate(Mockito.anyList(), Mockito.any())).thenReturn(Arrays.asList(1,2,4,5));
+
+        GenericListSorter sorter = Mockito.mock(GenericListSorter.class);
+        Mockito.when(sorter.sort(Mockito.anyList())).thenReturn(Arrays.asList(1,2,2,4,5));
+
 
         int distinct = aggregator.distinct(list, deduplicator, sorter);
 
