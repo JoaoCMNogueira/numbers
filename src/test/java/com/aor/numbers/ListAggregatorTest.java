@@ -36,6 +36,14 @@ public class ListAggregatorTest {
 
         Assertions.assertEquals(5, max);
     }
+    @Test
+    public void max_bug_7263() {
+
+        list = Arrays.asList(-1,-4, -5);
+        int max = aggregator.max(list);
+
+        Assertions.assertEquals(-1, max);
+    }
 
     @Test
     public void min() {

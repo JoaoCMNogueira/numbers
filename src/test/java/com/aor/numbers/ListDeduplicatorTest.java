@@ -27,7 +27,6 @@ public class ListDeduplicatorTest {
         GenericListSorter sorter = Mockito.mock(GenericListSorter.class);
         Mockito.when(sorter.sort(Mockito.anyList())).thenReturn(Arrays.asList(1,2,4,5));
 
-
         List<Integer> distinct = deduplicator.deduplicate(list, sorter);
 
         Assertions.assertEquals(expected, distinct);
