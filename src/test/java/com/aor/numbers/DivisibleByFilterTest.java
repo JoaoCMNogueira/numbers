@@ -8,17 +8,22 @@ public class DivisibleByFilterTest {
 
     private Integer inte;
     private Integer inte_div;
+    private Integer inte_notdiv;
     @BeforeEach
     public void setUp(){
         inte = 3;
         inte_div = 9;
+        inte_notdiv = 5;
     }
 
     @Test
     public void accept(){
-        DivisibleByFilter filter = new DivisibleByFilter(inte_div);
-        boolean answer = filter.accept(inte);
+        DivisibleByFilter div_filter = new DivisibleByFilter(inte_div);
+        DivisibleByFilter notdiv_filter = new DivisibleByFilter(inte_notdiv);
+        boolean positive_answer = div_filter.accept(inte);
+        boolean negative_answer = notdiv_filter.accept(inte);
 
-        Assertions.assertEquals(true, answer);
+        Assertions.assertTrue(positive_answer);
+        Assertions.assertFalse(negative_answer);
     }
 }

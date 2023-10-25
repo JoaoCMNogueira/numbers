@@ -6,17 +6,21 @@ import org.junit.jupiter.api.Test;
 
 public class PositiveFilterTest {
 
-    private Integer inte;
+    private Integer inte_pos;
+    private Integer inte_neg;
     @BeforeEach
     public void setUp(){
-        inte = 2;
+        inte_pos = 2;
+        inte_neg = -2;
     }
     @Test
     public void accept(){
         PositiveFilter filter = new PositiveFilter();
-        boolean answer = filter.accept(inte);
+        boolean positive_answer = filter.accept(inte_pos);
+        boolean negative_answer = filter.accept(inte_neg);
 
-        Assertions.assertEquals(true, answer);
+        Assertions.assertTrue(positive_answer);
+        Assertions.assertFalse(negative_answer);
 
     }
 }
